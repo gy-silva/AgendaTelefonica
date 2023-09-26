@@ -23,7 +23,8 @@ public class MenuUsuario {
             switch (escolha) {
                 case 1:
                     System.out.println("Digite o nome do contato: ");
-                    String nome = scanner.nextLine();
+                    scanner.nextLine();
+                    String nome = scanner.nextLine().toUpperCase();
                     System.out.print("Digite o número de telefone: ");
                     String numeroTelefone = scanner.nextLine();
                     Contato novoContato = new Contato(nome, numeroTelefone);
@@ -32,12 +33,15 @@ public class MenuUsuario {
                     break;
                 case 2:
                     System.out.print("Digite o nome do contato a ser removido: ");
+                    scanner.nextLine();
                     String nomeRemover = scanner.nextLine();
                     agenda.removerContato(nomeRemover);
+                    System.out.println("Contato removido com sucesso.");
                     break;
                 case 3:
                     System.out.print("Digite o nome do contato a ser buscado: ");
-                    String nomeBuscar = scanner.nextLine();
+                    scanner.nextLine();
+                    String nomeBuscar = scanner.nextLine().toUpperCase();
                     Contato contatoEncontrado = agenda.buscarContato(nomeBuscar);
                     if (contatoEncontrado != null) {
                         System.out.println("Contato encontrado: " + contatoEncontrado);
@@ -47,12 +51,18 @@ public class MenuUsuario {
                     break;
                 case 4:
                     System.out.println("Digite o nome do contato a ser atualizado: ");
-                    String nomeAtualizar = scanner.nextLine();
-                    Contato novoContatoAtualizado = new Contato(nomeAtualizar, "");
+                    scanner.nextLine();
+                    String nomeAtualizar = scanner.nextLine().toUpperCase();
                     System.out.print("Digite o novo número de telefone: ");
                     String novoNumeroTelefone = scanner.nextLine();
-                    novoContatoAtualizado = new Contato(nomeAtualizar, novoNumeroTelefone);
-                    agenda.atualizarContato(nomeAtualizar, novoContatoAtualizado);
+
+                    Contato novoContatoAtualizado = new Contato(nomeAtualizar, novoNumeroTelefone);
+
+                    if (agenda.atualizarContato(nomeAtualizar, novoContatoAtualizado)) {
+                        System.out.println("Contato atualizado com sucesso.");
+                    } else {
+                        System.out.println("Contato não encontrado.");
+                    }
                     break;
                 case 5:
                     agenda.listarContatos();

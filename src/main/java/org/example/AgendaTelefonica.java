@@ -12,7 +12,12 @@ public class AgendaTelefonica {
     }
 
     public void adicionarContato(Contato contato) {
-
+        for (Contato c : contatos) {
+            if (c.getNome().equalsIgnoreCase(contato.getNome()) || c.getNumeroTelefone().equals(contato.getNumeroTelefone())) {
+                System.out.println("Contato já existe na agenda.");
+                return;
+            }
+        }
         contatos.add(contato);
     }
 
@@ -40,16 +45,17 @@ public class AgendaTelefonica {
         return null;
     }
 
-    public void atualizarContato(String nome, Contato novoContato) {
+    public boolean atualizarContato(String nome, Contato novoContato) {
         for (int i = 0; i < contatos.size(); i++) {
             Contato contato = contatos.get(i);
             if (contato.getNome().equalsIgnoreCase(nome)) {
                 contatos.set(i, novoContato);
-                return;
+                return true;
             }
         }
-        System.out.println("Contato não encontrado.");
+        return false;
     }
+
 
     public void listarContatos() {
         if (contatos.isEmpty()) {
@@ -62,3 +68,4 @@ public class AgendaTelefonica {
         }
     }
 }
+
