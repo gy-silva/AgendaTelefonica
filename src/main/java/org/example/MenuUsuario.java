@@ -18,6 +18,8 @@ public class MenuUsuario {
             System.out.println("6. Sair");
             System.out.print("Escolha uma opção: ");
 
+            try{
+
              int escolha = scanner.nextInt();
 
             switch (escolha) {
@@ -72,6 +74,10 @@ public class MenuUsuario {
                     System.exit(0);
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
+            }
+            } catch (java.util.InputMismatchException e) {
+                System.err.println("Entrada inválida. Por favor, insira um número.");
+                scanner.nextLine();
             }
         }
 
